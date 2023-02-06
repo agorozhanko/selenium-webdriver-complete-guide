@@ -9,7 +9,7 @@ public class BaseTest extends Assert {
 
     @BeforeClass
     public void createDriver() {
-        driver = DriverFactory.createBrowser(BrowserType.CHROME);
+        driver = DriverFactory.createBrowser(BrowserType.FIREFOX_NIGHTLY);
     }
 
     @AfterClass

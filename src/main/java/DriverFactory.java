@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -20,7 +21,16 @@ public class DriverFactory {
             case FIREFOX:
                 System.setProperty("webdriver.gecko.driver", getDriverFile("driver/geckodriver.exe"));
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
                 return new FirefoxDriver(firefoxOptions);
+            case FIREFOX_NIGHTLY:
+                System.setProperty("webdriver.gecko.driver", getDriverFile("driver/geckodriver.exe"));
+                FirefoxOptions firefoxNightlyOptions = new FirefoxOptions();
+                firefoxNightlyOptions.setBinary("C:\\Program Files\\Firefox Nightly\\firefox.exe");
+                return new FirefoxDriver(firefoxNightlyOptions);
+            case EDGE:
+                System.setProperty("webdriver.edge.driver", getDriverFile("driver/msedgedriver.exe"));
+                return new EdgeDriver();
             default:
                 throw new IllegalStateException("Unsupported browser type");
         }

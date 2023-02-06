@@ -1,4 +1,6 @@
 public enum BrowserType {
     CHROME,
-    FIREFOX
+    FIREFOX,
+    FIREFOX_NIGHTLY,
+    EDGE
 }
