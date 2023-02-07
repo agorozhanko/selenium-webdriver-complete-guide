@@ -30,6 +30,39 @@
       <artifactId>selenium-java</artifactId>
       <version>4.8.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/ru.stqa.selenium/webdriver-factory -->
+    <dependency>
+      <groupId>ru.stqa.selenium</groupId>
+      <artifactId>webdriver-factory</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>ru.yandex.qatools.htmlelements</groupId>
+          <artifactId>htmlelements-thucydides</artifactId>
+        </exclusion>
+      </exclusions>
+      <version>4.4</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.26</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/ru.qatools.commons/properties -->
+    <dependency>
+      <groupId>ru.qatools.commons</groupId>
+      <artifactId>properties</artifactId>
+      <version>2.0.RC6</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+
   </dependencies>
 
 </project>

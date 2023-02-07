@@ -1,19 +1,17 @@
-import org.openqa.selenium.WebDriver;
+import core.DriverManager;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest extends Assert {
 
-    public static WebDriver driver;
-
-    @BeforeClass
-    public void createDriver() {
-        driver = DriverFactory.createBrowser(BrowserType.FIREFOX_NIGHTLY);
+    @BeforeClass(alwaysRun = true)
+    public void setUpBeforeEveryMethod() {
+        DriverManager.getInstance();
     }
 
-    @AfterClass
-    public void stopDriver() {
-        driver.quit();
+    @AfterClass(alwaysRun = true)
+    public void tearDownAfterEveryMethod() {
+        DriverManager.stop();
     }
 }
