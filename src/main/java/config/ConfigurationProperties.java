@@ -34,6 +34,10 @@ public class ConfigurationProperties {
     private String firefoxPath;
     @Property("test.ffnightly.path")
     private String firefoxNightlyPath;
+    @Property("test.username")
+    private String username;
+    @Property("test.password")
+    private String password;
 
     @Property("test.locale")
     private String locale = "en";
