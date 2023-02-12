@@ -24,6 +24,10 @@ public class DriverManager {
         getInstance().get(configProperties.getEndpoint());
     }
 
+    public static void open(String url) {
+        getInstance().get(url);
+    }
+
     public void clearAllCookies() {
         getInstance().manage().deleteAllCookies();
     }
