@@ -4,24 +4,16 @@ import core.DriverManager;
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utilities.Utilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountriesSteps {
-    private static final List<WebElement> countriesNames = DriverManager.findElementsByXPath(("//td[5]"));
+public class Countries {
     private static final List<WebElement> countriesZonesCount = DriverManager.findElementsByXPath(("//td[6]"));
 
     public static boolean verifyCountriesNamesSorting() {
-        return ArrayUtils.isSorted(getCountriesNames());
-    }
-
-    private static String[] getCountriesNames() {
-        List<String> countriesNamesText = new ArrayList<>();
-        for (WebElement countryName : countriesNames) {
-            countriesNamesText.add(countryName.getText());
-        }
-        return countriesNamesText.toArray(new String[0]);
+        return ArrayUtils.isSorted(Utilities.getObjectsNamesFromText("//td[5]"));
     }
 
     public static boolean verifyZonesSorting() {
