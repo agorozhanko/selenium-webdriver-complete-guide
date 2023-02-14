@@ -2,13 +2,12 @@ package steps;
 
 import config.ConfigurationProperties;
 import core.DriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class Login {
-    private static final WebElement username_input = DriverManager.getInstance().findElement(By.name("username"));
-    private static final WebElement password_input = DriverManager.getInstance().findElement(By.name("password"));
-    private static final WebElement login_btn = DriverManager.getInstance().findElement(By.name("login"));
+    private static final WebElement username_input = DriverManager.findElementByName(("username"));
+    private static final WebElement password_input = DriverManager.findElementByName(("password"));
+    private static final WebElement login_btn = DriverManager.findElementByName(("login"));
 
 
     public static void login() {

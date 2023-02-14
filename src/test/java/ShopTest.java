@@ -11,7 +11,7 @@ public class ShopTest extends BaseTest {
     }
 
     @Test(description = "Задание 7. Сценарий, проверяющий наличие стикеров у всех товаров")
-    public void checkHeaderTest() {
+    public void checkStickersTest() {
         assertTrue(Shop.checkStickers());
     }
 }

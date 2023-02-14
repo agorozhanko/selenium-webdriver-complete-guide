@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Shop {
-    private static final List<WebElement> products = DriverManager.getInstance().findElements(By.xpath("//li[contains(@class, 'product')]"));
+    private static final List<WebElement> products = DriverManager.findElementsByXPath(("//li[contains(@class, 'product')]"));
     private static final String sticker = ".//div[contains(@class, 'sticker')]";
 
     public static boolean checkStickers() {

@@ -1,13 +1,10 @@
 package steps;
 
-import config.ConfigurationProperties;
 import core.DriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class Admin {
@@ -20,7 +17,7 @@ public class Admin {
                 if (headerIsDisplayed()) return false;
             } else {
                 for (String subAppsMenuName : subAppsMenuNames) {
-                    DriverManager.getInstance().findElement(By.xpath(getSubAppMenuXpath(subAppsMenuName))).click();
+                    DriverManager.findElementByXPath((getSubAppMenuXpath(subAppsMenuName))).click();
                     if (headerIsDisplayed()) return false;
                 }
             }
@@ -29,7 +26,7 @@ public class Admin {
     }
 
     private static ArrayList<String> getAppMenuNames() {
-        List<WebElement> appsMenu = DriverManager.getInstance().findElements(By.id("app-"));
+        List<WebElement> appsMenu = DriverManager.findElementsByID(("app-"));
         ArrayList<String> appMenuNames = new ArrayList<>();
         for (WebElement menu : appsMenu) {
             appMenuNames.add(menu.getText());
@@ -38,25 +35,23 @@ public class Admin {
     }
 
     private static ArrayList<String> getSubAppMenuNames() {
-        DriverManager.getInstance().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        List<WebElement> subAppsMenu = DriverManager.getInstance().findElements(
-                By.xpath("//ul[@class='docs']//span"));
+        DriverManager.setImplicitlyWait(2);
+        List<WebElement> subAppsMenu = DriverManager.findElementsByXPath(("//ul[@class='docs']//span"));
         ArrayList<String> subAppsMenuNames = new ArrayList<>();
         for (WebElement menu : subAppsMenu) {
             subAppsMenuNames.add(menu.getText());
         }
-        DriverManager.getInstance().manage().timeouts().implicitlyWait(
-                ConfigurationProperties.getInstance().getTimeoutImplicitlyWait(), TimeUnit.SECONDS);
+        DriverManager.setImplicitlyWait();
         return subAppsMenuNames;
     }
 
     private static void appMenuClick(String appsMenuName) {
-        WebElement appsMenu = DriverManager.getInstance().findElement(By.xpath(getAppMenuXpath(appsMenuName)));
+        WebElement appsMenu = DriverManager.findElementByXPath((getAppMenuXpath(appsMenuName)));
         appsMenu.click();
     }
 
     private static boolean headerIsDisplayed() {
-        WebElement header = DriverManager.getInstance().findElement(By.xpath("//h1"));
+        WebElement header = DriverManager.findElementByXPath(("//h1"));
         if (!header.isDisplayed()) {
             return true;
         }

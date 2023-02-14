@@ -2,8 +2,11 @@ package core;
 
 
 import config.ConfigurationProperties;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
@@ -28,13 +31,46 @@ public class DriverManager {
         getInstance().get(url);
     }
 
+    public static void setImplicitlyWait() {
+        getInstance().manage().timeouts().implicitlyWait(
+                ConfigurationProperties.getInstance().getTimeoutImplicitlyWait(), TimeUnit.SECONDS);
+    }
+
+    public static void setImplicitlyWait(long timeout) {
+        getInstance().manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+    }
+
     public void clearAllCookies() {
         getInstance().manage().deleteAllCookies();
+    }
+
+    public static void back() {
+        getInstance().navigate().back();
     }
 
     public static void stop() {
         getInstance().quit();
         driverExtension = null;
+    }
+
+    public static WebElement findElementByXPath(String xpath) {
+        return getInstance().findElement(By.xpath(xpath));
+    }
+
+    public static WebElement findElementByID(String id) {
+        return getInstance().findElement(By.id(id));
+    }
+
+    public static WebElement findElementByName(String name) {
+        return getInstance().findElement(By.name(name));
+    }
+
+    public static List<WebElement> findElementsByXPath(String xpath) {
+        return getInstance().findElements(By.xpath(xpath));
+    }
+
+    public static List<WebElement> findElementsByID(String id) {
+        return getInstance().findElements(By.id(id));
     }
 
 
