@@ -40,6 +40,14 @@ public class DriverManager {
         getInstance().manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
     }
 
+    public static void waiting(long waitPeriod) {
+        try {
+            TimeUnit.MILLISECONDS.sleep(waitPeriod);
+        } catch (InterruptedException e) {
+            e.getMessage();
+        }
+    }
+
     public void clearAllCookies() {
         getInstance().manage().deleteAllCookies();
     }

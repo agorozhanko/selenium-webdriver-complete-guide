@@ -1,6 +1,7 @@
 package utilities;
 
 import core.DriverManager;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -14,5 +15,13 @@ public class Utilities {
             countriesNamesText.add(objectNames.getText());
         }
         return countriesNamesText.toArray(new String[0]);
+    }
+
+    public static String getName() {
+        return RandomStringUtils.randomAlphabetic(10);
+    }
+
+    public static String getPhone() {
+        return RandomStringUtils.randomNumeric(9);
     }
 }

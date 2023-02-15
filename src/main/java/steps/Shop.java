@@ -11,6 +11,49 @@ public class Shop {
     private static final List<WebElement> products = DriverManager.findElementsByXPath(("//li[contains(@class, 'product')]"));
     private static final String sticker = ".//div[contains(@class, 'sticker')]";
 
+    public static void newCustomerClick() {
+        DriverManager.findElementByXPath("//a[text()='New customers click here']").click();
+    }
+
+    public static boolean accountIsCreated() {
+        String noticeSuccess = "//div[@class='notice success' and text()=' Your customer account has been created.']";
+        return DriverManager.findElementByXPath(noticeSuccess).isDisplayed();
+    }
+
+    public static boolean login(String email, String password) {
+        fillEmail(email);
+        fillPassword(password);
+        loginClick();
+        return loginSuccess();
+    }
+
+    private static boolean loginSuccess() {
+        String noticeSuccess = "//div[@class='notice success' and contains(text(),' You are now logged in as')]";
+        return DriverManager.findElementByXPath(noticeSuccess).isDisplayed();
+    }
+
+    private static void fillEmail(String email) {
+        DriverManager.findElementByName("email").sendKeys(email);
+    }
+
+    private static void fillPassword(String password) {
+        DriverManager.findElementByName("password").sendKeys(password);
+    }
+
+    private static void loginClick() {
+        DriverManager.findElementByName("login").click();
+    }
+
+    public static boolean logout() {
+        DriverManager.findElementByXPath("//div[@id='box-account']//a[text()='Logout']").click();
+        return logoutSuccess();
+    }
+
+    private static boolean logoutSuccess() {
+        String noticeSuccess = "//div[@class='notice success' and text()=' You are now logged out.']";
+        return DriverManager.findElementByXPath(noticeSuccess).isDisplayed();
+    }
+
     public static boolean checkStickers() {
         for (WebElement product : products) {
             List<WebElement> stickers = product.findElements(By.xpath(sticker));
