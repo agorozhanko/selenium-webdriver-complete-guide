@@ -1,8 +1,9 @@
 import core.DriverManager;
+import model.Account;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import steps.CreateAccountPage;
-import steps.Shop;
+import steps.ShopPage;
 import utilities.Utilities;
 
 public class RegistrationTest extends BaseTest {
@@ -18,24 +19,23 @@ public class RegistrationTest extends BaseTest {
 
     @Test(description = "11. Сделайте сценарий регистрации пользователя")
     public void registrationTest() {
-        Shop.newCustomerClick();
-        CreateAccountPage.fillFirstname(NAME);
-        CreateAccountPage.fillLastname(NAME);
-        CreateAccountPage.fillAddress("834 CENTURY ST");
-        CreateAccountPage.fillPostcode("93455");
-        CreateAccountPage.fillCity("SANTA MARIA CA");
-        CreateAccountPage.fillCountry("United States");
-        CreateAccountPage.fillState("California");
-        CreateAccountPage.fillEmail(EMAIL);
-        CreateAccountPage.fillPhone(PHONE);
-        CreateAccountPage.fillDesiredPassword(NAME);
-        CreateAccountPage.fillConfirmPassword(NAME);
-        CreateAccountPage.createAccountClick();
+        Account account = new Account().setFirstname(NAME)
+                .setLastname(NAME)
+                .setAddress("834 CENTURY ST")
+                .setPostcode("93455")
+                .setCity("SANTA MARIA CA")
+                .setCountry("United States")
+                .setState("California")
+                .setEmail(EMAIL)
+                .setPhone(PHONE)
+                .setPassword(NAME);
 
-        assertTrue(Shop.accountIsCreated());
-        assertTrue(Shop.logout());
+        ShopPage.newCustomerClick();
+        CreateAccountPage.createAccount(account);
+        assertTrue(ShopPage.accountIsCreated());
+        assertTrue(ShopPage.logout());
 
-        assertTrue(Shop.login(EMAIL, NAME));
-        assertTrue(Shop.logout());
+        assertTrue(ShopPage.login(EMAIL, NAME));
+        assertTrue(ShopPage.logout());
     }
 }

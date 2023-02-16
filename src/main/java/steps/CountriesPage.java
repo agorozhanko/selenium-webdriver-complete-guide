@@ -9,7 +9,7 @@ import utilities.Utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Countries {
+public class CountriesPage {
     private static final List<WebElement> countriesZonesCount = DriverManager.findElementsByXPath(("//td[6]"));
 
     public static boolean verifyCountriesNamesSorting() {

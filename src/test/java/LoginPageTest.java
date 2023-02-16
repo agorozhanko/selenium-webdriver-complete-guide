@@ -2,9 +2,9 @@ import core.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import steps.Login;
+import steps.LoginPage;
 
-public class LoginTest extends BaseTest {
+public class LoginPageTest extends BaseTest {
 
     @BeforeClass
     void goToUrl() {
@@ -13,7 +13,7 @@ public class LoginTest extends BaseTest {
 
     @Test(description = "Задание 3. Сценарий логина")
     public void loginTest() {
-        Login.login();
+        LoginPage.login();
         WebElement logo = DriverManager.findElementByXPath(("//img[@title='My Store']"));
         assertTrue(logo.isDisplayed());
     }

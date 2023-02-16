@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Shop {
+public class ShopPage {
     private static final List<WebElement> products = DriverManager.findElementsByXPath(("//li[contains(@class, 'product')]"));
     private static final String sticker = ".//div[contains(@class, 'sticker')]";
 

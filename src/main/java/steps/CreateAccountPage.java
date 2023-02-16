@@ -1,59 +1,74 @@
 package steps;
 
 import core.DriverManager;
+import model.Account;
 import org.openqa.selenium.support.ui.Select;
 
 public class CreateAccountPage {
 
+    public static void createAccount(Account account) {
+        fillFirstname(account.getFirstname());
+        fillLastname(account.getLastname());
+        fillAddress(account.getAddress());
+        fillPostcode(account.getPostcode());
+        fillCity(account.getCity());
+        fillCountry(account.getCountry());
+        fillState(account.getState());
+        fillEmail(account.getEmail());
+        fillPhone(account.getPhone());
+        fillDesiredPassword(account.getPassword());
+        fillConfirmPassword(account.getPassword());
+        createAccountClick();
+    }
 
-    public static void fillFirstname(String firstname) {
+    private static void fillFirstname(String firstname) {
         DriverManager.findElementByName("firstname").sendKeys(firstname);
     }
 
-    public static void fillLastname(String lastname) {
+    private static void fillLastname(String lastname) {
         DriverManager.findElementByName("lastname").sendKeys(lastname);
     }
 
-    public static void fillAddress(String address) {
+    private static void fillAddress(String address) {
         DriverManager.findElementByName("address1").sendKeys(address);
     }
 
-    public static void fillPostcode(String postcode) {
+    private static void fillPostcode(String postcode) {
         DriverManager.findElementByName("postcode").sendKeys(postcode);
     }
 
-    public static void fillCity(String city) {
+    private static void fillCity(String city) {
         DriverManager.findElementByName("city").sendKeys(city);
     }
 
-    public static void fillCountry(String country) {
+    private static void fillCountry(String country) {
         Select select = new Select(DriverManager.findElementByName("country_code"));
         select.selectByVisibleText(country);
     }
 
-    public static void fillState(String country) {
+    private static void fillState(String country) {
         DriverManager.waiting(10);
         Select select = new Select(DriverManager.findElementByXPath("//select[@name='zone_code']"));
         select.selectByVisibleText(country);
     }
 
-    public static void fillEmail(String email) {
+    private static void fillEmail(String email) {
         DriverManager.findElementByName("email").sendKeys(email);
     }
 
-    public static void fillPhone(String phone) {
+    private static void fillPhone(String phone) {
         DriverManager.findElementByName("phone").sendKeys(phone);
     }
 
-    public static void fillDesiredPassword(String password) {
+    private static void fillDesiredPassword(String password) {
         DriverManager.findElementByName("password").sendKeys(password);
     }
 
-    public static void fillConfirmPassword(String password) {
+    private static void fillConfirmPassword(String password) {
         DriverManager.findElementByName("confirmed_password").sendKeys(password);
     }
 
-    public static void createAccountClick() {
+    private static void createAccountClick() {
         DriverManager.findElementByName("create_account").click();
     }
 }

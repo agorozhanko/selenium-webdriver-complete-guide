@@ -1,9 +1,9 @@
 import core.DriverManager;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import steps.Shop;
+import steps.ShopPage;
 
-public class ShopTest extends BaseTest {
+public class ShopPageTest extends BaseTest {
 
     @BeforeClass
     void setUp() {
@@ -12,6 +12,6 @@ public class ShopTest extends BaseTest {
 
     @Test(description = "Задание 7. Сценарий, проверяющий наличие стикеров у всех товаров")
     public void checkStickersTest() {
-        assertTrue(Shop.checkStickers());
+        assertTrue(ShopPage.checkStickers());
     }
 }

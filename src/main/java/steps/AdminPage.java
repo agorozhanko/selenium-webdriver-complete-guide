@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Admin {
+public class AdminPage {
     public static boolean checkHeaders() {
         ArrayList<String> appsMenuNames = getAppMenuNames();
         for (String appsMenuName : appsMenuNames) {
@@ -65,4 +65,6 @@ public class Admin {
     private static String getSubAppMenuXpath(String appsMenu) {
         return String.format("//ul[@class='docs']//span[text()='%s']", appsMenu);
     }
+
+
 }

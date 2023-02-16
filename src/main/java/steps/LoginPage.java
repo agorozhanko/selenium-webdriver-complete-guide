@@ -4,7 +4,7 @@ import config.ConfigurationProperties;
 import core.DriverManager;
 import org.openqa.selenium.WebElement;
 
-public class Login {
+public class LoginPage {
     private static final WebElement username_input = DriverManager.findElementByName(("username"));
     private static final WebElement password_input = DriverManager.findElementByName(("password"));
     private static final WebElement login_btn = DriverManager.findElementByName(("login"));

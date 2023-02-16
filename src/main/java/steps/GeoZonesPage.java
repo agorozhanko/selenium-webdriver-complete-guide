@@ -5,7 +5,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import static utilities.Utilities.getObjectsNamesFromText;
 
-public class GeoZones {
+public class GeoZonesPage {
     public static boolean verifySorting() {
         String[] countries = getObjectsNamesFromText("//td[3]/a");
         for (String country : countries) {
