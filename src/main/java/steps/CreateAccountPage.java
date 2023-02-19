@@ -42,8 +42,8 @@ public class CreateAccountPage {
     }
 
     private static void fillCountry(String country) {
-        Select select = new Select(DriverManager.findElementByName("country_code"));
-        select.selectByVisibleText(country);
+        DriverManager.findElementByXPath("//span[@class='select2-selection__arrow']").click();
+        DriverManager.findElementByXPath(String.format("//li[text()='%s']", country)).click();
     }
 
     private static void fillState(String country) {
