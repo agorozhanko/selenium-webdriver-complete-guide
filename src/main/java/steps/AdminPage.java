@@ -66,5 +66,12 @@ public class AdminPage {
         return String.format("//ul[@class='docs']//span[text()='%s']", appsMenu);
     }
 
+    public static void openCatalog() {
+        DriverManager.findElementByXPath((getAppMenuXpath("Catalog"))).click();
+    }
+
+    public static void addNewProduct() {
+        DriverManager.findElementByXPath("//a[text()=' Add New Product']").click();
+    }
 
 }
