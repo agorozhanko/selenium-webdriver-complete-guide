@@ -43,12 +43,9 @@ public class ElementStyleUtilities {
     }
 
     public static boolean campaignPriceMoreThanRegularPrice(WebElement regularPrice, WebElement campaignPrice) {
-        int regularPriceWeight = regularPrice.getSize().width;
-        int regularPriceHeight = regularPrice.getSize().height;
+        String regularPriceSize = regularPrice.getCssValue("font-size").replace("px", "");
+        String campaignPriceSize = campaignPrice.getCssValue("font-size").replace("px", "");
 
-        int campaignPriceWeight = campaignPrice.getSize().width;
-        int campaignPriceHeight = campaignPrice.getSize().height;
-
-        return (campaignPriceWeight > regularPriceWeight) && (campaignPriceHeight > regularPriceHeight);
+        return Double.parseDouble(campaignPriceSize) > Double.parseDouble(regularPriceSize);
     }
 }
