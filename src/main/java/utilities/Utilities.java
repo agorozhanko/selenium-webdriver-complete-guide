@@ -39,4 +39,5 @@ public class Utilities {
             throw new RuntimeException("Could not parse absolute path to WebDriver. Relative path is " + fileRelativePath);
         }
     }
+
 }

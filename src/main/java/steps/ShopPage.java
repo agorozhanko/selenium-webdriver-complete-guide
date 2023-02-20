@@ -3,6 +3,7 @@ package steps;
 import core.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utilities.ElementStyleUtilities;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -10,6 +11,10 @@ import java.util.NoSuchElementException;
 public class ShopPage {
     private static final List<WebElement> products = DriverManager.findElementsByXPath(("//li[contains(@class, 'product')]"));
     private static final String sticker = ".//div[contains(@class, 'sticker')]";
+    private static final WebElement campaignProduct = DriverManager.findElementByXPath("//div[@id='box-campaigns']//li[contains(@class,'product')]");
+    private static final WebElement name = campaignProduct.findElement(By.xpath(".//div[@class='name']"));
+    private static final WebElement regularPrice = campaignProduct.findElement(By.xpath(".//*[@class='regular-price']"));
+    private static final WebElement campaignPrice = campaignProduct.findElement(By.xpath(".//strong[@class='campaign-price']"));
 
     public static void newCustomerClick() {
         DriverManager.findElementByXPath("//a[text()='New customers click here']").click();
@@ -67,5 +72,38 @@ public class ShopPage {
             }
         }
         return true;
+    }
+
+    public static String getName() {
+        return name.getText();
+    }
+
+    public static String getRegularPrice() {
+        return regularPrice.getText();
+    }
+
+    public static String getCampaignPrice() {
+        return campaignPrice.getText();
+    }
+
+    public static boolean verifyRegularPrice() {
+        return ElementStyleUtilities.verifyRegularPrice(regularPrice);
+    }
+
+    public static boolean verifyCampaignPrice() {
+        return ElementStyleUtilities.verifyCampaignPrice(campaignPrice);
+    }
+
+    public static boolean campaignPriceMoreThanRegularPrice() {
+        return ElementStyleUtilities.campaignPriceMoreThanRegularPrice(regularPrice, campaignPrice);
+    }
+
+    public static void openFirstCampaignProduct() {
+        openProduct(campaignProduct);
+    }
+
+    public static void openProduct(WebElement product) {
+        product.click();
+        DriverManager.waiting(100);
     }
 }
