@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CountriesPage {
-    private static final List<WebElement> countriesZonesCount = DriverManager.findElementsByXPath(("//td[6]"));
 
     public static boolean verifyCountriesNamesSorting() {
         return ArrayUtils.isSorted(Utilities.getObjectsNamesFromText("//td[5]"));
@@ -40,6 +39,7 @@ public class CountriesPage {
 
     public static List<String> getCountriesNamesWithZones() {
         List<String> countriesNames = new ArrayList<>();
+        List<WebElement> countriesZonesCount = DriverManager.findElementsByXPath(("//td[6]"));
         for (WebElement countryZonesCount : countriesZonesCount) {
             if (!countryZonesCount.getText().equals("0")) {
                 String countriesName = countryZonesCount.findElement(By.xpath("./../td[5]")).getText();

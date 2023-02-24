@@ -1,5 +1,6 @@
 import core.DriverManager;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import steps.AddNewCountryPage;
 import steps.CountriesPage;
@@ -11,6 +12,10 @@ public class CountriesPageTest extends BaseTest {
     void setUp() {
         DriverManager.open();
         LoginPage.login();
+    }
+
+    @BeforeMethod
+    void openCountriesPage() {
         DriverManager.open("http://localhost/litecart/admin/?app=countries&doc=countries");
     }
 
