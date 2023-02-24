@@ -1,6 +1,7 @@
 import core.DriverManager;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import steps.AddNewCountryPage;
 import steps.CountriesPage;
 import steps.LoginPage;
 
@@ -24,6 +25,12 @@ public class CountriesPageTest extends BaseTest {
             "-- открывает страницу этой страны и там проверяет, что геозоны расположены в алфавитном порядке")
     public void verifyZonesSortingTest() {
         assertTrue(CountriesPage.verifyZonesSorting());
+    }
+
+    @Test(description = "Задание 14. Проверьте, что ссылки открываются в новом окне")
+    public void linksOpenInNewWindowTest() {
+        CountriesPage.clickAddNewCountry();
+        AddNewCountryPage.openExternalLinks();
     }
 
 }

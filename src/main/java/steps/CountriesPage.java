@@ -52,4 +52,8 @@ public class CountriesPage {
     public static String getCountryNameXpath(String name) {
         return String.format("//td/a[text()='%s']", name);
     }
+
+    public static void clickAddNewCountry() {
+        DriverManager.findElementByXPath("//a[text()=' Add New Country']").click();
+    }
 }

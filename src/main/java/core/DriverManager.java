@@ -5,8 +5,10 @@ import config.ConfigurationProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
@@ -46,6 +48,16 @@ public class DriverManager {
         } catch (InterruptedException e) {
             e.getMessage();
         }
+    }
+
+    public static ExpectedCondition<String> anyWindowOtherThan(Set<String> oldWindows) {
+        return new ExpectedCondition<String>() {
+            public String apply(WebDriver driver) {
+                Set<String> handles = driver.getWindowHandles();
+                handles.removeAll(oldWindows);
+                return handles.size() > 0 ? handles.iterator().next() : null;
+            }
+        };
     }
 
     public void clearAllCookies() {
