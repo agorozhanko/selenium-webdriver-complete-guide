@@ -3,6 +3,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import steps.ProductPage;
 import steps.ShopPage;
+import steps.ShoppingCartPage;
 
 public class ShopPageTest extends BaseTest {
 
@@ -39,5 +40,14 @@ public class ShopPageTest extends BaseTest {
         assertEquals(shopName, productName);
         assertEquals(shopRegularPrice, productRegularPrice);
         assertEquals(shopCampaignPrice, productCampaignPrice);
+    }
+
+    @Test(description = "Задание 13. Сделайте сценарий работы с корзиной")
+    public void cartTest() {
+        ShopPage.addThreeProducts();
+        ShopPage.checkout();
+        ShoppingCartPage.removeAllCartItems();
+        assertTrue(ShoppingCartPage.isEmpty());
+
     }
 }

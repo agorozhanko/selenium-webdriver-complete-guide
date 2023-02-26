@@ -4,7 +4,7 @@ import core.DriverManager;
 import org.openqa.selenium.WebElement;
 import utilities.ElementStyleUtilities;
 
-public class ProductPage {
+public class ProductPage extends CartBlock {
     private static final WebElement name = DriverManager.findElementByXPath("//h1[@itemprop='name']");
     private static final WebElement regularPrice = DriverManager.findElementByXPath("//*[@class='regular-price']");
     private static final WebElement campaignPrice = DriverManager.findElementByXPath("//strong[@class='campaign-price']");
@@ -32,4 +32,11 @@ public class ProductPage {
     public static boolean campaignPriceMoreThanRegularPrice() {
         return ElementStyleUtilities.campaignPriceMoreThanRegularPrice(regularPrice, campaignPrice);
     }
+
+    public static void addCartProduct(int quantityProduct) {
+        DriverManager.findElementByName("add_cart_product").click();
+        quantityIsExist(quantityProduct);
+//        quantityIsDisappear(quantityIsExist(quantityProduct));
+    }
+
 }

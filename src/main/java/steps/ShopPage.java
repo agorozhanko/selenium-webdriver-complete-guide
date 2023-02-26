@@ -8,13 +8,17 @@ import utilities.ElementStyleUtilities;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ShopPage {
+public class ShopPage extends CartBlock {
     private static final List<WebElement> products = DriverManager.findElementsByXPath(("//li[contains(@class, 'product')]"));
     private static final String sticker = ".//div[contains(@class, 'sticker')]";
     private static final WebElement campaignProduct = DriverManager.findElementByXPath("//div[@id='box-campaigns']//li[contains(@class,'product')]");
     private static final WebElement name = campaignProduct.findElement(By.xpath(".//div[@class='name']"));
     private static final WebElement regularPrice = campaignProduct.findElement(By.xpath(".//*[@class='regular-price']"));
     private static final WebElement campaignPrice = campaignProduct.findElement(By.xpath(".//strong[@class='campaign-price']"));
+
+    public static void openShopPage() {
+        DriverManager.open("http://localhost/litecart/");
+    }
 
     public static void newCustomerClick() {
         DriverManager.findElementByXPath("//a[text()='New customers click here']").click();
@@ -96,6 +100,20 @@ public class ShopPage {
 
     public static boolean campaignPriceMoreThanRegularPrice() {
         return ElementStyleUtilities.campaignPriceMoreThanRegularPrice(regularPrice, campaignPrice);
+    }
+
+    public static void addThreeProducts() {
+        for (int i = 1; i < 4; i++) {
+            openFirstProduct();
+            ProductPage.addCartProduct(i);
+            openShopPage();
+        }
+    }
+
+    public static void openFirstProduct() {
+        String productXpath = "//li[contains(@class,'product')]";
+        List<WebElement> campaignProducts = DriverManager.findElementsByXPath(productXpath);
+        campaignProducts.get(0).click();
     }
 
     public static void openFirstCampaignProduct() {

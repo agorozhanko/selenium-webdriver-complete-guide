@@ -93,5 +93,9 @@ public class DriverManager {
         return getInstance().findElements(By.id(id));
     }
 
+    public static List<WebElement> findElementsByName(String name) {
+        return getInstance().findElements(By.name(name));
+    }
+
 
 }
