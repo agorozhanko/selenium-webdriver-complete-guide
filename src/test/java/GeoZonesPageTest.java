@@ -1,15 +1,17 @@
 import core.DriverManager;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import steps.GeoZonesPage;
-import steps.LoginPage;
+import pages.GeoZonesPage;
+import pages.LoginPage;
 
 public class GeoZonesPageTest extends BaseTest {
 
+    private LoginPage loginPage = new LoginPage();
+
     @BeforeClass
     void setUp() {
-        DriverManager.open();
-        LoginPage.login();
+        loginPage.open();
+        loginPage.login();
         DriverManager.open("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
     }
 

@@ -1,16 +1,28 @@
-package steps;
+package pages;
 
 import core.DriverManager;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 import static utilities.Utilities.getObjectsNamesFromText;
 
 public class CatalogPage {
 
-    public static void openCatalog() {
+    @FindBy(xpath = "//a[contains(@href,'product_id') and not(@title='Edit')]")
+    private List<WebElement> productNames;
+
+    public CatalogPage() {
+        PageFactory.initElements(DriverManager.getInstance(), this);
+    }
+
+    public void open() {
         DriverManager.open("http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1");
     }
 
-    public static boolean checkBrowserLogsInProductPage() {
+    public boolean checkBrowserLogsInProductPage() {
         String[] productNames = getProductNames();
         for (String productName : productNames) {
             DriverManager.findElementByXPath(getProductXPathByName(productName)).click();
@@ -22,11 +34,11 @@ public class CatalogPage {
         return true;
     }
 
-    public static String[] getProductNames() {
-        return getObjectsNamesFromText("//a[contains(@href,'product_id') and not(@title='Edit')]");
+    private String[] getProductNames() {
+        return getObjectsNamesFromText(productNames);
     }
 
-    public static String getProductXPathByName(String name) {
+    private String getProductXPathByName(String name) {
         return String.format("//a[text()='%s']", name);
     }
 

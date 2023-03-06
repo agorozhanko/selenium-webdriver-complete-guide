@@ -1,21 +1,21 @@
-import core.DriverManager;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import steps.LoginPage;
+import pages.AdminPage;
+import pages.LoginPage;
 
 public class LoginPageTest extends BaseTest {
+    private LoginPage loginPage = new LoginPage();
+    private AdminPage adminPage;
 
     @BeforeClass
     void goToUrl() {
-        DriverManager.open();
+        loginPage.open();
     }
 
     @Test(description = "Задание 3. Сценарий логина")
     public void loginTest() {
-        LoginPage.login();
-        WebElement logo = DriverManager.findElementByXPath(("//img[@title='My Store']"));
-        assertTrue(logo.isDisplayed());
+        adminPage = loginPage.login();
+        assertTrue(adminPage.logoIsDisplayed());
     }
 
 }

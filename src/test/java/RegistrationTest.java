@@ -1,9 +1,8 @@
-import core.DriverManager;
 import model.Account;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import steps.CreateAccountPage;
-import steps.ShopPage;
+import pages.CreateAccountPage;
+import pages.ShopPage;
 import utilities.Utilities;
 
 public class RegistrationTest extends BaseTest {
@@ -12,9 +11,12 @@ public class RegistrationTest extends BaseTest {
     private static final String EMAIL = NAME + "@gmail.com";
     private static final String PHONE = Utilities.getPhone();
 
+    private ShopPage shopPage = new ShopPage();
+    private CreateAccountPage createAccountPage;
+
     @BeforeClass
     void setUp() {
-        DriverManager.open("http://localhost/litecart/");
+        shopPage.open();
     }
 
     @Test(description = "11. Сделайте сценарий регистрации пользователя")
@@ -30,12 +32,12 @@ public class RegistrationTest extends BaseTest {
                 .setPhone(PHONE)
                 .setPassword(NAME);
 
-        ShopPage.newCustomerClick();
-        CreateAccountPage.createAccount(account);
-        assertTrue(ShopPage.accountIsCreated());
-        assertTrue(ShopPage.logout());
+        createAccountPage = shopPage.newCustomerClick();
+        createAccountPage.createAccount(account);
+        assertTrue(shopPage.accountIsCreated());
+        assertTrue(shopPage.logout());
 
-        assertTrue(ShopPage.login(EMAIL, NAME));
-        assertTrue(ShopPage.logout());
+        assertTrue(shopPage.login(EMAIL, NAME));
+        assertTrue(shopPage.logout());
     }
 }

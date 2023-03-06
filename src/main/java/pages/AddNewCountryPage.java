@@ -1,4 +1,4 @@
-package steps;
+package pages;
 
 import core.DriverManager;
 import org.openqa.selenium.WebElement;

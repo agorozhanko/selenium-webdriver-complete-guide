@@ -1,41 +1,45 @@
-import core.DriverManager;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import steps.ProductPage;
-import steps.ShopPage;
-import steps.ShoppingCartPage;
+import pages.ProductPage;
+import pages.ShopPage;
+import pages.ShoppingCartPage;
 
 public class ShopPageTest extends BaseTest {
 
-    @BeforeClass
+    private ShopPage shopPage = new ShopPage();
+    private ProductPage productPage;
+    private ShoppingCartPage shoppingCartPage;
+
+    @BeforeMethod
     void setUp() {
-        DriverManager.open("http://localhost/litecart/");
+        shopPage.open();
     }
 
+    // TODO: 08.03.2023 падает т.к. не у всех товаров есть стикеры 
     @Test(description = "Задание 7. Сценарий, проверяющий наличие стикеров у всех товаров")
     public void checkStickersTest() {
-        assertTrue(ShopPage.checkStickers());
+        assertTrue(shopPage.checkStickers());
     }
 
     @Test(description = "Задание 10. Проверить, что открывается правильная страница товара")
     public void verifyProductTest() {
-        String shopName = ShopPage.getName();
-        String shopRegularPrice = ShopPage.getRegularPrice();
-        String shopCampaignPrice = ShopPage.getCampaignPrice();
+        String shopName = shopPage.getName();
+        String shopRegularPrice = shopPage.getRegularPrice();
+        String shopCampaignPrice = shopPage.getCampaignPrice();
 
-        assertTrue(ShopPage.verifyRegularPrice());
-        assertTrue(ShopPage.verifyCampaignPrice());
-        assertTrue(ShopPage.campaignPriceMoreThanRegularPrice());
+        assertTrue(shopPage.verifyRegularPrice());
+        assertTrue(shopPage.verifyCampaignPrice());
+        assertTrue(shopPage.campaignPriceMoreThanRegularPrice());
 
-        ShopPage.openFirstCampaignProduct();
+        productPage = shopPage.openFirstCampaignProduct();
 
-        String productName = ProductPage.getName();
-        String productRegularPrice = ProductPage.getRegularPrice();
-        String productCampaignPrice = ProductPage.getCampaignPrice();
+        String productName = productPage.getName();
+        String productRegularPrice = productPage.getRegularPrice();
+        String productCampaignPrice = productPage.getCampaignPrice();
 
-        assertTrue(ProductPage.verifyRegularPrice());
-        assertTrue(ProductPage.verifyCampaignPrice());
-        assertTrue(ProductPage.campaignPriceMoreThanRegularPrice());
+        assertTrue(productPage.verifyRegularPrice());
+        assertTrue(productPage.verifyCampaignPrice());
+        assertTrue(productPage.campaignPriceMoreThanRegularPrice());
 
         assertEquals(shopName, productName);
         assertEquals(shopRegularPrice, productRegularPrice);
@@ -44,10 +48,10 @@ public class ShopPageTest extends BaseTest {
 
     @Test(description = "Задание 13. Сделайте сценарий работы с корзиной")
     public void cartTest() {
-        ShopPage.addThreeProducts();
-        ShopPage.checkout();
-        ShoppingCartPage.removeAllCartItems();
-        assertTrue(ShoppingCartPage.isEmpty());
+        shopPage.addThreeProducts();
+        shoppingCartPage = shopPage.checkout();
+        shoppingCartPage.removeAllCartItems();
+        assertTrue(shoppingCartPage.isEmpty());
 
     }
 }

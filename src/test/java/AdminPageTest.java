@@ -1,11 +1,10 @@
-import core.DriverManager;
 import model.Product;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import steps.AddNewProductPage;
-import steps.AdminPage;
-import steps.CatalogPage;
-import steps.LoginPage;
+import pages.AddNewProductPage;
+import pages.AdminPage;
+import pages.CatalogPage;
+import pages.LoginPage;
 import utilities.Utilities;
 
 public class AdminPageTest extends BaseTest {
@@ -13,15 +12,20 @@ public class AdminPageTest extends BaseTest {
     private static final String IMAGE_PATH = "src/main/resources/image/GB_Camera.jpg";
     private static final String PRICE = Utilities.getPrice();
 
+    private LoginPage loginPage = new LoginPage();
+    private AdminPage adminPage;
+    private AddNewProductPage addNewProductPage;
+    private CatalogPage catalogPage = new CatalogPage();
+
     @BeforeClass
     void setUp() {
-        DriverManager.open();
-        LoginPage.login();
+        loginPage.open();
+        adminPage = loginPage.login();
     }
 
     @Test(description = "Задание 6. Сценарий, проходящий по всем разделам админки")
     public void checkHeaderTest() {
-        assertTrue(AdminPage.checkHeaders());
+        assertTrue(adminPage.checkHeaders());
     }
 
 
@@ -40,17 +44,17 @@ public class AdminPageTest extends BaseTest {
                 .setPurchasePriceCurrency("US Dollars")
                 .setPrice(PRICE);
 
-        AdminPage.openCatalog();
-        AdminPage.addNewProduct();
-        AddNewProductPage.addNewProduct(product);
-        assertTrue(AddNewProductPage.newProductAdded());
-        assertTrue(AddNewProductPage.newProductIsDisplayed(product.getName()));
+        adminPage.openCatalog();
+        addNewProductPage = adminPage.addNewProduct();
+        addNewProductPage.addNewProduct(product);
+        assertTrue(addNewProductPage.newProductAdded());
+        assertTrue(addNewProductPage.newProductIsDisplayed(product.getName()));
     }
 
     @Test(description = "Задание 17. Проверьте отсутствие сообщений в логе браузера")
     public void checkBrowserLogs() {
-        CatalogPage.openCatalog();
-        assertTrue(CatalogPage.checkBrowserLogsInProductPage());
+        catalogPage.open();
+        assertTrue(catalogPage.checkBrowserLogsInProductPage());
     }
 
 
