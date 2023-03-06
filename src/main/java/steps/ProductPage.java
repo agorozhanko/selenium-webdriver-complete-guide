@@ -36,7 +36,6 @@ public class ProductPage extends CartBlock {
     public static void addCartProduct(int quantityProduct) {
         DriverManager.findElementByName("add_cart_product").click();
         quantityIsExist(quantityProduct);
-//        quantityIsDisappear(quantityIsExist(quantityProduct));
     }
 
 }

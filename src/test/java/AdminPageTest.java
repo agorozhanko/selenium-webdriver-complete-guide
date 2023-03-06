@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import steps.AddNewProductPage;
 import steps.AdminPage;
+import steps.CatalogPage;
 import steps.LoginPage;
 import utilities.Utilities;
 
@@ -45,4 +46,12 @@ public class AdminPageTest extends BaseTest {
         assertTrue(AddNewProductPage.newProductAdded());
         assertTrue(AddNewProductPage.newProductIsDisplayed(product.getName()));
     }
+
+    @Test(description = "Задание 17. Проверьте отсутствие сообщений в логе браузера")
+    public void checkBrowserLogs() {
+        CatalogPage.openCatalog();
+        assertTrue(CatalogPage.checkBrowserLogsInProductPage());
+    }
+
+
 }

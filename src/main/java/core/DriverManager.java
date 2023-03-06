@@ -5,6 +5,7 @@ import config.ConfigurationProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.List;
@@ -60,7 +61,15 @@ public class DriverManager {
         };
     }
 
-    public void clearAllCookies() {
+    public static List<LogEntry> getAllBrowserLogs() {
+        return getInstance().manage().logs().get("browser").getAll();
+    }
+
+    public static boolean browserLogsEmpty() {
+        return getAllBrowserLogs().size() == 0;
+    }
+
+    public static void clearAllCookies() {
         getInstance().manage().deleteAllCookies();
     }
 
